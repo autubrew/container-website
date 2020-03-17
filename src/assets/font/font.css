@@ -1,0 +1,13 @@
+/* serif */
+
+@font-face {
+    font-family: "PTSerif";
+    src: url("PTSerif-Regular.ttf");
+}
+
+/* sans-serif */
+
+@font-face {
+    font-family: "OpenSans";
+    src: url('OpenSans-Regular.ttf');
+}

@@ -1,0 +1,11 @@
+<svg version="1.1"
+     xmlns="http://www.w3.org/2000/svg"
+     width="40px"
+     height="40px"
+     viewBox="-10 -10 60 60"
+>
+    <g>
+        <path d="M1,1L1,38L39,38L39,1ZM5,5L35,5L35,34L5,34ZM26,9L26,14L31,14L31,9ZM26,17L26,30L31,30L31,17" fill="#262262"/>
+        <path d="M9,9L9,30L22,30L22,25L14,25L14,14L22,14L22,9" fill="#818285"/>
+    </g>
+</svg>
