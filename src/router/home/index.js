@@ -1,5 +1,5 @@
 export default {
     path: '/',
-    name: 'route-home',
-    component: () => import('@/views/Home')
+    name: 'home',
+    component: () => import('@/views/home/index')
 }

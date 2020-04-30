@@ -9,13 +9,6 @@ import store from "@/store";
 
 Vue.use(Router);
 
-/*//vue-router报NavigationDuplicated的解决方案
-//禁止全局路由错误处理打印
-const originalPush = Router.prototype.push;
-Router.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch(err => err)
-};*/
-
 const router = new Router({
 /*    mode: 'history',*/
     base: process.env.BASE_URLE,

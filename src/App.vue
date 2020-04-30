@@ -1,33 +1,19 @@
 <template>
 
     <div id="containeros">
-
         <vue-progress-bar/>
-
-        <NavBar v-show="isDisplay"/>
-
-        <router-view/>
-
-        <WebInfo v-show="isDisplay"/>
-
+        <component :is="currentLayout"></component>
     </div>
 
 </template>
 
 <script>
 
-    import NavBar from "@/components/common/NavBar";
-    import WebInfo from "@/components/common/Footer";
-
     export default {
         name: 'app',
-        components: {
-            NavBar,
-            WebInfo,
-        },
         computed: {
-            isDisplay: function () {
-                return this.$route.name !== 'router-404'
+            currentLayout() {
+                return (this.$route.meta.layout || 'default') + '-layout';
             }
         }
     }

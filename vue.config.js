@@ -1,27 +1,55 @@
+const path = require('path');
+
+const env = process.env.NODE_ENV;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require("compression-webpack-plugin");
 
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+
 module.exports = {
     chainWebpack: config => {
-        // 移除 prefetch 插件
+        // 移除 prefetch 插件，减少首屏加载负担
         config.plugins.delete('prefetch');
+        // i18n 国际化
         config.module
-            .rule("i18n")
+            .rule('i18n')
             .resourceQuery(/blockType=i18n/)
             .type('javascript/auto')
-            .use("i18n")
-                .loader("@kazupon/vue-i18n-loader")
+            .use('i18n')
+                .loader('@kazupon/vue-i18n-loader')
                 .end()
             .use('yaml')
                 .loader('yaml-loader')
                 .end();
-        config.plugin('webpack-bundle-analyzer')
-            .use(new BundleAnalyzerPlugin({
-                openAnalyzer: true
-            }))
+        // 配置 svg-sprite-loader
+        config.module
+            .rule('svg')
+            .exclude.add(resolve('src/icons'))
+            .end();
+        config.module
+            .rule('icons')
+            .test(/\.svg$/)
+            .include.add(resolve('src/icons'))
+            .end()
+            .use('svg-sprite-loader')
+            .loader('svg-sprite-loader')
+            .options({
+                symbolId: 'icon-[name]'
+            })
+            .end();
+        // 打包分析插件
+        if (env === 'production') {
+            config.plugin('webpack-bundle-analyzer')
+                .use(new BundleAnalyzerPlugin({
+                    openAnalyzer: true
+                }))
+        }
     },
     configureWebpack: () => {
-        if (process.env.NODE_ENV === 'production') {
+        // gzip压缩优化，服务端需配合开启
+        if (env === 'production') {
             return {
                 plugins: [
                     new CompressionPlugin({
@@ -37,7 +65,7 @@ module.exports = {
         extract: false,
         loaderOptions: {
             sass: {
-                prependData: `@import "@/assets/scss/variables.scss";`
+                prependData: `@import "@/styles/variables.scss";`
             }
         }
     },

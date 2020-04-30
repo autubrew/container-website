@@ -4,5 +4,5 @@ export default {
     meta: {
         title: 'Others'
     },
-    component : () => import('@/views/Others'),
+    component : () => import('@/views/others/index'),
 }

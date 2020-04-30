@@ -1,23 +1,23 @@
 export default {
     path: '/resources',
-    name: 'route-resources',
-    component: () => import('@/views/Resources'),
+    name: 'resources',
+    component: () => import('@/views/resources/index'),
     children: [
         {
             path: 'page/:number',
-            name: 'route-resources-page',
+            name: 'resources-page',
             meta: {
                 title: 'Resources'
             },
-            component: () => import('@/components/resources/ResourceList')
+            component: () => import('@/views/resources/components/ResourceList')
         },
         {
             path: ':category/:keyword/page/:number',
-            name: 'route-resources-category-page',
+            name: 'resources-category-page',
             meta: {
                 title: 'Resources'
             },
-            component: () => import('@/components/resources/ResourceList')
+            component: () => import('@/views/resources/components/ResourceList')
         }
     ]
 }

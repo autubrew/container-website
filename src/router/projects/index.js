@@ -1,23 +1,23 @@
 export default {
     path: '/projects',
-    name: 'route-projects',
-    component: () => import('@/views/Projects'),
+    name: 'projects',
+    component: () => import('@/views/projects/index'),
     children: [
         {
             path: 'page/:number',
-            name: 'route-projects-page',
+            name: 'projects-page',
             meta: {
                 title: 'Projects'
             },
-            component: () => import('@/components/projects/ProjectList')
+            component: () => import('@/views/projects/components/ProjectList')
         },
         {
             path: 'post/:slug',
-            name: 'route-projects-post',
+            name: 'projects-post',
             meta: {
                 title: 'Projects'
             },
-            component: () => import('@/components/projects/ProjectPost'),
+            component: () => import('@/views/projects/components/ProjectPost'),
             props: true
         }
     ]

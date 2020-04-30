@@ -1,6 +1,10 @@
+import Vue from 'vue'
 import axios from 'axios'
+import VueAxios from 'vue-axios'
 import store from '@/store'
 import app from '@/main'
+
+Vue.use(VueAxios, axios);
 
 let axiosPromiseCancel = [];
 
@@ -19,19 +23,19 @@ axios.interceptors.request.use(config => {
         store.state.axiosPromiseCancel.push(cancel)
     });
 
-    app.$Progress.start(); //发起请求，进度条开始
+    // TODO：进度条对axios请求、路由切换等统一做出变化
+    app.$Progress.start();   // 发起请求，进度条开始
     return config
 }, error => {
 
-
-    app.$Progress.fail();   //请求失败
+    app.$Progress.fail();   // 请求失败
     return Promise.reject(error)
 });
 
 //响应拦截器
 axios.interceptors.response.use(response => {
 
-    app.$Progress.finish(); //接收到响应，进度条完成
+    app.$Progress.finish();  // 接收到响应，进度条完成
     return response
 }, error => {
 
@@ -142,11 +146,11 @@ const views = {
     }
 };
 
-export default  {
+Vue.prototype.$api =  {
     axiosPromiseCancel,
     projects,
     resources,
     post,
     search,
     views
-}
+};
